@@ -313,7 +313,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 	<script src="/template/vendor/bootstrap/js/popper.js"></script>
 	<script src="/template/vendor/bootstrap/js/bootstrap.min.js"></script>
 <!--===============================================================================================-->
-	<script src="vendor/select2/select2.min.js"></script>
+	<script src="/template/vendor/select2/select2.min.js"></script>
 	<script>
 		$(".js-select2").each(function(){
 			$(this).select2({
