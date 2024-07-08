@@ -65,3 +65,5 @@ Route::post('/services/load-product', [\App\Http\Controllers\MainController::cla
 
 Route::get('danh-muc/{id}-{slug}.html', [\App\Http\Controllers\MenuController::class, 'index']);
 Route::get('san-pham/{id}-{slug}.html', [\App\Http\Controllers\ProductController::class, 'index']);
+Route::post('add-cart', [\App\Http\Controllers\CartController::class, 'index']);
+Route::get('carts', [\App\Http\Controllers\CartController::class, 'show']);
