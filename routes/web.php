@@ -19,9 +19,9 @@ Route::post('admin/users/login/store', [\App\Http\Controllers\Admin\Users\LoginC
 Route::middleware(['auth'])->group(function () {
 
     Route::prefix('admin')->group(function () {
-        Route::get('/', [\App\Http\Controllers\Admin\MainController::class, 'index']) -> name('admin');
+        Route::get('/', [\App\Http\Controllers\Admin\MainController::class, 'index'])->name('admin');
         Route::get('main', [\App\Http\Controllers\Admin\MainController::class, 'index']);
-    
+
         #Menu
         Route::prefix('menus')->group(function () {
             Route::get('add', [\App\Http\Controllers\Admin\MenuController::class, 'create']);
@@ -67,3 +67,6 @@ Route::get('danh-muc/{id}-{slug}.html', [\App\Http\Controllers\MenuController::c
 Route::get('san-pham/{id}-{slug}.html', [\App\Http\Controllers\ProductController::class, 'index']);
 Route::post('add-cart', [\App\Http\Controllers\CartController::class, 'index']);
 Route::get('carts', [\App\Http\Controllers\CartController::class, 'show']);
+Route::post('update-cart', [\App\Http\Controllers\CartController::class, 'update']);
+Route::get('carts/delete/{id}', [\App\Http\Controllers\CartController::class, 'remove']);
+Route::post('carts', [\App\Http\Controllers\CartController::class, 'addCart']);
