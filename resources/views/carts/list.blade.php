@@ -1,6 +1,7 @@
 @extends('main')
 
 @section('content')
+    @include('admin.alert')
     @if (count($products) != 0)
         <form class="bg0 p-t-130 p-b-85" method="post">
             <div class="container">
@@ -25,7 +26,7 @@
                                         @foreach ($products as $key => $product)
                                             @php
                                                 $price =
-                                                $product->price_sale != 0 ? $product->price_sale : $product->price;
+                                                    $product->price_sale != 0 ? $product->price_sale : $product->price;
                                                 $priceEnd = $price * $carts[$product->id];
                                                 $total += $priceEnd;
                                             @endphp
@@ -102,36 +103,40 @@
                             </div>
 
                             <div class="flex-w flex-t bor12 p-t-15 p-b-30">
-                               
-    
+
+
                                 <div class="p-r-18 p-r-0-sm w-full-ssm" style="width: 100%">
-                                   
-                                    
+
+
                                     <div class="p-t-15">
                                         <span class="stext-112 cl8">
                                             Thông tin giao hàng:
                                         </span>
-    
+
                                         <div class="bor8 bg0 m-b-12">
-                                            <input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="name" placeholder="Tên khách hàng" required>
+                                            <input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="name"
+                                                placeholder="Tên khách hàng" required>
                                         </div>
 
                                         <div class="bor8 bg0 m-b-12">
-                                            <input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="phone" placeholder="Số điện thoại" required>
+                                            <input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="phone"
+                                                placeholder="Số điện thoại" required>
                                         </div>
 
                                         <div class="bor8 bg0 m-b-12">
-                                            <input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="address" placeholder="Địa chỉ giao hàng" required>
+                                            <input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="address"
+                                                placeholder="Địa chỉ giao hàng" required>
                                         </div>
 
                                         <div class="bor8 bg0 m-b-12">
-                                            <input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="email" placeholder="Email liên hệ">
+                                            <input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="email"
+                                                placeholder="Email liên hệ">
                                         </div>
 
                                         <div class="bor8 bg0 m-b-12">
                                             <textarea class="stext-111 cl8 plh3 size-111 p-lr-15" name="note" placeholder="Ghi chú"></textarea>
                                         </div>
-    
+
                                     </div>
                                 </div>
                             </div>

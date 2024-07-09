@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Services\Slider\SliderService;
 use App\Http\Services\Menu\MenuService;
 use App\Http\Services\Product\ProductService;
+use App\Http\Services\CartService;
 use App\Models\Product;
 
 class MainController extends Controller
@@ -13,12 +14,14 @@ class MainController extends Controller
     protected $slider;
     protected $menu;
     protected $product;
+    protected$cart;
 
-    public function __construct(SliderService $slider, MenuService $menu, ProductService $product)
+    public function __construct(SliderService $slider, MenuService $menu, ProductService $product, CartService $cart)
     {
         $this->slider = $slider;
         $this->menu = $menu;
         $this->product = $product;
+        $this->cart = $cart;
     }
 
 
@@ -27,7 +30,8 @@ class MainController extends Controller
             'title' => 'Shop HS',
             'sliders' => $this->slider->showSlider(),
             'menus' => $this->menu->showMenu(),
-            'products' => $this->product->getProduct()
+            'products' => $this->product->getProduct(),
+            'carts' => $this->cart->getProduct()
         ]);
     }
 
