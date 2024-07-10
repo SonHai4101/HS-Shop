@@ -92,15 +92,15 @@ class CartService
             $this->infoProductCart($carts, $customer->id);
 
             DB::commit();
-            Session()->flash('success','Đặt hàng thành công');
+            Session()->flash('success', 'Đặt hàng thành công');
 
             #Queue
             SendMail::dispatch($request->input('email'))->delay(now()->addSeconds(5));
-            
+
             Session::forget('carts');
         } catch (\Exception $err) {
             DB::rollBack();
-            Session()->flash('error','Đặt hàng lỗi, vui lòng thử lại sau');
+            Session()->flash('error', 'Đặt hàng lỗi, vui lòng thử lại sau');
             return false;
         }
         return true;
@@ -124,5 +124,19 @@ class CartService
             ];
         }
         return Cart::insert($data);
+    }
+
+    public function getCustomer()
+    {
+        return Customer::orderByDesc('id')->paginate(15);
+    }
+
+    public function getProductForCart($customer)
+    {
+        return $customer->carts()->with([
+            'product' => function ($query) {
+                $query->select('id', 'name', 'thumb');
+            }
+        ])->get();
     }
 }
