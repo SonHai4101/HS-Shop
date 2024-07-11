@@ -2,7 +2,7 @@
 
 
 @section('content')
-    <<div class="customer mt-3">
+    <div class="customer mt-3">
         <ul>
             <li>Tên Khách Hàng: <strong>{{ $customer->name }}</strong></li>
             <li>Số Điện Thoại: <strong>{{ $customer->phone }}</strong></li>

@@ -30,8 +30,8 @@ class MainController extends Controller
             'title' => 'Shop HS',
             'sliders' => $this->slider->showSlider(),
             'menus' => $this->menu->showMenu(),
-            'products' => $this->product->getProduct(),
-            'carts' => $this->cart->getProduct()
+            'productions' => $this->product->getProduct(),
+            'products' => $this->cart->getProduct()
         ]);
     }
 

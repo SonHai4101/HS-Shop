@@ -15,16 +15,17 @@
         <div class="header-cart-content flex-w js-pscroll">
             @php
                 $sumPriceCart = 0;
+                // $sumPriceItem = 0;
             @endphp
             <ul class="header-cart-wrapitem w-full">
                 @if (count($products) > 0)
                     @foreach ($products as $key => $product)
-                    @php
-                        $price = \App\Helpers\Helper::price($product->price, $product->price_sale);
-                        // $sumPriceItem = $carts[$product->id] * ($product->price_sale != 0 ? $product->price_sale : $product->price);
-                        // $sumPriceCart += $sumPriceItem;
-                        $sumPriceCart += $product->price_sale != 0 ? $product->price_sale : $product->price;
-                    @endphp
+                        @php
+                            $price = \App\Helpers\Helper::price($product->price, $product->price_sale);
+                            $sumPriceItem = $carts[$product->id] * ($product->price_sale != 0 ? $product->price_sale : $product->price);
+                            $sumPriceCart += $sumPriceItem;
+                            // $sumPriceCart += $product->price_sale != 0 ? $product->price_sale : $product->price;
+                        @endphp
                         <li class="header-cart-item flex-w flex-t m-b-12">
                             <div class="header-cart-item-img">
                                 <img src="{{ $product->thumb }}" alt="IMG">
@@ -36,8 +37,8 @@
                                 </a>
 
                                 <span class="header-cart-item-info">
-                                    {{-- {{ $carts[$product->id] }} x {!! $price !!} --}}
-                                    {!! $price !!}
+                                    {{ $carts[$product->id] }} x {!! $price !!}
+                                    {{-- {!! $price !!} --}}
                                 </span>
                             </div>
                         </li>
@@ -48,7 +49,7 @@
 
             <div class="w-full">
                 <div class="header-cart-total w-full p-tb-40">
-                    Total: {{ number_format($sumPriceCart, 0, '', '.')}}
+                    Total: {{ number_format($sumPriceCart, 0, '', '.') }}
                 </div>
 
                 <div class="header-cart-buttons flex-w w-full">
