@@ -16,6 +16,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('admin/users/login', [\App\Http\Controllers\Admin\Users\LoginController::class, 'index'])->name('login');
 Route::post('admin/users/login/store', [\App\Http\Controllers\Admin\Users\LoginController::class, 'store']);
 
+Route::get('customer/login', [\App\Http\Controllers\Admin\Users\LoginController::class, 'customerIndex']);
+// Route::post('admin/users/login/store', [\App\Http\Controllers\Admin\Users\LoginController::class, 'store']);
+
 Route::middleware(['auth'])->group(function () {
 
     Route::prefix('admin')->group(function () {
