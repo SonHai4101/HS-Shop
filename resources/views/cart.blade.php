@@ -22,9 +22,9 @@
                     @foreach ($products as $key => $product)
                         @php
                             $price = \App\Helpers\Helper::price($product->price, $product->price_sale);
-                            $sumPriceItem = $carts[$product->id] * ($product->price_sale != 0 ? $product->price_sale : $product->price);
-                            $sumPriceCart += $sumPriceItem;
-                            // $sumPriceCart += $product->price_sale != 0 ? $product->price_sale : $product->price;
+                            // $sumPriceItem = $carts[$product->id] * ($product->price_sale != 0 ? $product->price_sale : $product->price);
+                            // $sumPriceCart += $sumPriceItem;
+                            $sumPriceCart += $product->price_sale != 0 ? $product->price_sale : $product->price;
                         @endphp
                         <li class="header-cart-item flex-w flex-t m-b-12">
                             <div class="header-cart-item-img">
@@ -37,8 +37,8 @@
                                 </a>
 
                                 <span class="header-cart-item-info">
-                                    {{ $carts[$product->id] }} x {!! $price !!}
-                                    {{-- {!! $price !!} --}}
+                                    {{-- {{ $carts[$product->id] }} x {!! $price !!} --}}
+                                    {!! $price !!}
                                 </span>
                             </div>
                         </li>
