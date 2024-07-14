@@ -8,6 +8,7 @@ use App\Http\Services\Menu\MenuService;
 use App\Http\Services\Product\ProductService;
 use App\Http\Services\CartService;
 use App\Models\Product;
+use Illuminate\Support\Facades\Session;
 
 class MainController extends Controller
 {
@@ -26,12 +27,14 @@ class MainController extends Controller
 
 
     public function index() {
+        $cartProduct = $this->cart->getProduct();
         return view('home', [
             'title' => 'Shop HS',
             'sliders' => $this->slider->showSlider(),
             'menus' => $this->menu->showMenu(),
-            'products' => $this->product->getProduct()
+            'products' => $this->product->getProduct(),
             // 'products' => $this->cart->getProduct()
+            'carts' => Session::get('carts')
         ]);
     }
 
