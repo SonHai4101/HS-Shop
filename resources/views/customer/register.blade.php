@@ -77,7 +77,7 @@
                     </a>
                 </div> --}}
                 <div class="mt-2 mb-0">
-                    <a href="login.html" class="text-center">I already have an account</a>
+                    <a href="login" class="text-center">I already have an account</a>
                 </div>
             </div>
             <!-- /.form-box -->

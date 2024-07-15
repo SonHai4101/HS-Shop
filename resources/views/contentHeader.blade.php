@@ -10,11 +10,23 @@
                 Miễn phí vận chuyển cho đơn hàng trên 500k
             </div>
 
-            <div class="right-top-bar flex-w h-full">
-                <a href="#" class="flex-c-m trans-04 p-lr-25">
-                    My Account
-                </a>
-            </div>
+            @if (Auth::user())
+                <div class="right-top-bar flex-w h-full">
+                    <a href="#" class="flex-c-m trans-04 p-lr-25">
+                        {{ Auth::user()->name }}
+                    </a>
+                    <a href="logout" class="flex-c-m trans-04 p-lr-25">
+                        Đăng xuất
+                    </a>
+                </div>
+            @else
+                <div class="right-top-bar flex-w h-full">
+                    <a href="customer/login" class="flex-c-m trans-04 p-lr-25">
+                        My Account
+                    </a>
+                </div>
+            @endif
+
         </div>
     </div>
 

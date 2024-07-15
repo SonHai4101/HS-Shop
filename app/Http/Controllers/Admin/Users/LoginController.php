@@ -47,6 +47,26 @@ class LoginController extends Controller
         ]);
     }
 
+    public function customerStore(Request $request)
+    {
+        $this->validate($request, [
+            'email' => 'required|email',
+            'password' => 'required'
+        ]);
+        if (
+            Auth::attempt([
+                'email' => $request->input('email'),
+                'password' => $request->input('password')
+                // 'userType' == '1'
+            ], $request->input('remember'))
+        ) {
+            return redirect('');
+        }
+
+        Session()->flash('error', 'Email hoặc Password không chính xác');
+        return redirect()->back();
+    }
+
     public function customerRegister()
     {
         return view('customer.register', [
@@ -61,7 +81,7 @@ class LoginController extends Controller
             'email' => 'required|email|unique:users,email',
             'password' => 'required|min:6|max:20',
             'confirm_password' => 'required|same:password',
-            'terms'=> 'required'
+            'terms' => 'required'
         ]);
         $request['password'] = Hash::make($request['password']);
 
@@ -70,6 +90,12 @@ class LoginController extends Controller
         } catch (\Exception $err) {
             return redirect()->back();
         }
+        return redirect('');
+    }
+
+    public function logout()
+    {
+        Auth::logout();
         return redirect('');
     }
 }

@@ -17,11 +17,12 @@ Route::get('admin/users/login', [\App\Http\Controllers\Admin\Users\LoginControll
 Route::post('admin/users/login/store', [\App\Http\Controllers\Admin\Users\LoginController::class, 'store']);
 
 Route::get('customer/login', [\App\Http\Controllers\Admin\Users\LoginController::class, 'customerLogin']);
-// Route::post('customer/users/login/store', [\App\Http\Controllers\Admin\Users\LoginController::class, 'store']);
+Route::post('customer/login', [\App\Http\Controllers\Admin\Users\LoginController::class, 'customerStore']);
 
 Route::get('customer/register', [\App\Http\Controllers\Admin\Users\LoginController::class, 'customerRegister']);
 Route::post('customer/register', [\App\Http\Controllers\Admin\Users\LoginController::class, 'storeRegister']);
 
+Route::get('logout', [\App\Http\Controllers\Admin\Users\LoginController::class, 'logout']);
 
 Route::middleware(['auth'])->group(function () {
 
