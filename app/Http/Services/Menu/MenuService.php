@@ -4,6 +4,7 @@ namespace App\Http\Services\Menu;
 
 use App\Models\Menu;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\DB;
 
 class MenuService {
 
@@ -68,17 +69,13 @@ class MenuService {
 
     public function getProducts($menu, $request) {
         $query = $menu->products()->select('id', 'name', 'price', 'price_sale', 'thumb')
+        ->addSelect(DB::raw('IF(price_sale != 0, price_sale, price) AS current_price'))
             ->where('active', 1);
+        
         if ($request->input('price')) {
-            $query->orderBy('price', $request->input('price'));
+            $query->orderBy('current_price', $request->input('price'));
         }
 
-        // if ($request->input('price') == "asc") {
-        //     return $query->orderBy('price')->paginate(12)->withQueryString();
-        // }
-        // if ($request->input('price') == "desc") {
-        //     return $query->orderByDesc('price')->paginate(12)->withQueryString();
-        // }
         return $query->orderbyDesc('id')
                     ->paginate(12)
                     ->withQueryString();
