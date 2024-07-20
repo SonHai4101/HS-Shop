@@ -24,7 +24,7 @@ Route::post('customer/register', [\App\Http\Controllers\Admin\Users\LoginControl
 
 Route::get('logout', [\App\Http\Controllers\Admin\Users\LoginController::class, 'logout']);
 
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['admin'])->group(function () {
 
     Route::prefix('admin')->group(function () {
         Route::get('/', [\App\Http\Controllers\Admin\MainController::class, 'index'])->name('admin');

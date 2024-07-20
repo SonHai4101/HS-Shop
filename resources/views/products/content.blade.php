@@ -212,51 +212,41 @@
                                     <ul class="p-lr-28 p-lr-15-sm">
                                         <li class="flex-w flex-t p-b-7">
                                             <span class="stext-102 cl3 size-205">
-                                                Weight
+                                                Phát hành
                                             </span>
 
                                             <span class="stext-102 cl6 size-206">
-                                                0.79 kg
+                                                2019
                                             </span>
                                         </li>
 
                                         <li class="flex-w flex-t p-b-7">
                                             <span class="stext-102 cl3 size-205">
-                                                Dimensions
+                                                Giới tính
                                             </span>
 
                                             <span class="stext-102 cl6 size-206">
-                                                110 x 33 x 100 cm
+                                                unisex
                                             </span>
                                         </li>
 
                                         <li class="flex-w flex-t p-b-7">
                                             <span class="stext-102 cl3 size-205">
-                                                Materials
+                                                Độ tuổi
                                             </span>
 
                                             <span class="stext-102 cl6 size-206">
-                                                60% cotton
+                                                22+
                                             </span>
                                         </li>
 
                                         <li class="flex-w flex-t p-b-7">
                                             <span class="stext-102 cl3 size-205">
-                                                Color
+                                                Độ lưu mùi
                                             </span>
 
                                             <span class="stext-102 cl6 size-206">
-                                                Black, Blue, Grey, Green, Red, White
-                                            </span>
-                                        </li>
-
-                                        <li class="flex-w flex-t p-b-7">
-                                            <span class="stext-102 cl3 size-205">
-                                                Size
-                                            </span>
-
-                                            <span class="stext-102 cl6 size-206">
-                                                XL, L, M, S
+                                                8
                                             </span>
                                         </li>
                                     </ul>
