@@ -9,17 +9,20 @@ class MenuController extends Controller
 {
     protected $menuService;
 
-    public function __construct(MenuService $menuService) {
+    public function __construct(MenuService $menuService)
+    {
         $this->menuService = $menuService;
     }
-    public function index(Request $request, $id, $slug = '') {
+
+    public function index(Request $request, $id, $slug = '')
+    {
         $menu = $this->menuService->getId($id);
         $products = $this->menuService->getProducts($menu, $request);
 
         return view('menu', [
             'title' => $menu->name,
             'products' => $products,
-            'menu'  => $menu
+            'menu' => $menu
         ]);
     }
 }

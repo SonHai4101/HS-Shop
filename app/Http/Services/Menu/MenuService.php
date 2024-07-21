@@ -5,22 +5,28 @@ namespace App\Http\Services\Menu;
 use App\Models\Menu;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
+use App\Models\Product;
 
-class MenuService {
+class MenuService
+{
 
-    public function getParent() {
+    public function getParent()
+    {
         return Menu::where('parent_id', 0)->get();
     }
-    
-    public function getAll() {
+
+    public function getAll()
+    {
         return Menu::orderbyDesc('id')->paginate(20);
     }
 
-    public function showMenu() {
+    public function showMenu()
+    {
         return Menu::select('name', 'id')->where('parent_id', 0)->orderbyDesc('id')->get();
     }
 
-    public function create($request) {
+    public function create($request)
+    {
         try {
             Menu::create([
                 'name' => (string) $request->input('name'),
@@ -39,9 +45,10 @@ class MenuService {
         return true;
     }
 
-    public function update($request, $menu) : bool {
+    public function update($request, $menu): bool
+    {
         if ($request->input('parent_id') != $menu->id) {
-            $menu->parent_id = (int)$request->input('parent_id');
+            $menu->parent_id = (int) $request->input('parent_id');
         }
         $menu->name = (string) $request->input('name');
         $menu->description = (string) $request->input('description');
@@ -52,10 +59,11 @@ class MenuService {
         return true;
     }
 
-    public function destroy($request) {
+    public function destroy($request)
+    {
         $id = (int) $request->input('id');
         $menu = Menu::where('id', $id)->first();
-        
+
         if ($menu) {
             return Menu::where('id', $id)->orWhere('parent_id', $id)->delete();
         }
@@ -63,21 +71,40 @@ class MenuService {
         return false;
     }
 
-    public function getId($id) {
+    public function getId($id)
+    {
         return Menu::where('id', $id)->where('active', 1)->firstOrFail();
     }
 
-    public function getProducts($menu, $request) {
+    public function getProducts($menu, $request)
+    {
+        if ($menu->parent_id == 0) {
+
+            $bridge = DB::table('products')
+                ->join('menus', 'products.menu_id', '=', 'menus.id')
+                ->select('products.id', 'products.name', 'products.price', 'products.price_sale', 'products.thumb')
+                ->addSelect(DB::raw('IF(products.price_sale != 0, products.price_sale, price) AS current_price'))
+                ->where('menus.parent_id', $menu->id)
+                ->where('products.active', 1);
+         
+            if ($request->input('price')) {
+
+                $bridge->orderBy('current_price', $request->input('price'));
+            }
+
+            return $bridge->orderByDesc('products.id')->paginate(12)->withQueryString();
+        }
+
         $query = $menu->products()->select('id', 'name', 'price', 'price_sale', 'thumb')
-        ->addSelect(DB::raw('IF(price_sale != 0, price_sale, price) AS current_price'))
+            ->addSelect(DB::raw('IF(price_sale != 0, price_sale, price) AS current_price'))
             ->where('active', 1);
-        
+
         if ($request->input('price')) {
             $query->orderBy('current_price', $request->input('price'));
         }
 
         return $query->orderbyDesc('id')
-                    ->paginate(12)
-                    ->withQueryString();
+            ->paginate(12)
+            ->withQueryString();
     }
 }
