@@ -20,7 +20,7 @@ class AdminAuthenticate
         if (Auth::check() && Auth::user()->userType == 0) {
             return $next($request);
         }
-        Session()->flash('error', 'Vui lòng sử dụng tài khoản quản trị viên!');
+        // Session()->flash('error', 'Vui lòng sử dụng tài khoản quản trị viên!');
         return redirect('admin/users/login');
     }
 }
